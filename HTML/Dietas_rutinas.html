@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../IMG/Logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../CSS/Estilos2.css">
+    <title>Healthy Life</title>
+    <style>
+        .contenedor1 section {
+          display: none;
+        }
+      </style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <a class="btn boton-is" onclick="validar()" href="../HTML/Registro_dt.php">Registro dieta</a>
+            <a class="btn boton-as" onclick="validar()" href="../HTML/Registro_rt.html">Registro rutina</a>
+        </div>
+    </div>
+      <div class="contenedor1">
+        <form method="post" action="../HTML/Planes.php">
+            <div id="slider">
+                <section id="p0" >
+                    <h3>1.-¿Cree usted que lleva una alimentación adecuada?</h3>
+                    <label>
+                        <input type="radio" name="pregunta1" id="p11">De acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta1" id="p12">Medianamente de acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta1" id="p13">En total desacuerdo
+                    </label>
+                </section>
+                <section id="p1">
+                    <h3>2.-¿Usted emplea alimentos de distintos grupos del plato del buen comer?</h3>
+                    <label>
+                        <input type="radio" name="pregunta2" id="p21">De acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta2" id="p22">Medianamente de acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta2" id="p23">En total desacuerdo
+                    </label>
+                </section>
+                <section id="p2">
+                    <h3>3.-¿Usted mide o estima la cantidad de calorías que ingiere por día?</h3>
+                    <label>
+                        <input type="radio" name="pregunta3" id="p31">De acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta3" id="p32">Medianamente de acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta3" id="p33">En total desacuerdo
+                    </label>
+                </section>
+                <section id="p3">
+                    <h3>4.-¿Alguna vez ha recibido comentarios negativos hacia su aspecto físico?</h3>
+                    <label>
+                        <input type="radio" name="pregunta4" id="p41">De acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta4" id="p42">Medianamente de acuerdo
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta4" id="p43">En total desacuerdo
+                    </label>
+                </section>
+                <section id="p4">
+                    <h3>5.-¿Con qué frecuencia te ejercitas semanalmente?</h3>
+                    <label>
+                        <input type="radio" name="pregunta5" id="p51">6 Días a la semana
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta5" id="p52">3 Días de la semana
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta5" id="p53">No me ejercito
+                    </label>
+                </section>
+                <section id="p5">
+                    <h3>6.-¿Qué cambio desea realizar en su cuerpo?</h3>
+                    <label>
+                        <input type="radio" name="pregunta6" id="p61" value="Quiero desarrollar músculos">Quiero desarrollar músculos
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta6" id="p62" value="Me siento perfecto con mi físico">Me siento perfecto con mi físico
+                    </label>
+                    <label>
+                        <input type="radio" name="pregunta6" id="p63" value="Necesito bajar de peso">Necesito bajar de peso
+                    </label>
+                </section>
+                <center>
+                <input class="ver-plan" id="verPlanBtn" onclick="resultado()" type="submit" value="Ver Plan">
+                </center>
+            </div>
+        </form>
+        <div class="slider-controls">
+            <div class="contenedor">
+            <a class="btn1 btn-2" id="prevBtn">Anterior
+                <span></span>
+                <span></span>
+            </a>
+            <a class="btn1 btn-2" id="nextBtn" onclick="nextSection()">Siguiente
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+      </div>
+      </div>
+    
+      <script>
+        const slider = document.getElementById('slider');
+        const sections = slider.getElementsByTagName('section');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const verPlanBtn = document.getElementById('verPlanBtn');
+        let currentSection = 0;
+    
+        
+        function showSection(index) {
+          for (let i = 0; i < sections.length; i++) {
+            sections[i].style.display = 'none';
+          }
+          sections[index].style.display = 'block';
+    
+          if (index === sections.length - 1) {
+            nextBtn.style.display = 'none'; 
+            verPlanBtn.style.display = 'block'; 
+          } else {
+            nextBtn.style.display = 'block'; 
+            verPlanBtn.style.display = 'none'; 
+          }
+        }
+        
+    
+        
+        function nextSection() {
+          if (currentSection < sections.length - 1) {
+            currentSection++;
+            showSection(currentSection);
+          }
+        }
+    
+        
+        function prevSection() {
+          if (currentSection > 0) {
+            currentSection--;
+            showSection(currentSection);
+          }
+        }
+    
+        
+        prevBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          prevSection();
+        });
+    
+        
+        showSection(currentSection);
+    
+    
+        function validar() {
+          var contraseña = "healthylife";
+          do {
+            var pedirc = prompt("Ingrese la contraseña");
+            if (pedirc == contraseña) {
+              alert("Contraseña correcta");
+            } else {
+              alert("Contraseña incorrecta");
+            }
+          } while (pedirc !== contraseña);
+        }
+    
+        function resultado() {
+          var p1, p2, p3, p4, p5, p6, nota;
+    
+          if (document.getElementById('p11').checked == true) {
+            p1 = 1;
+          } else if (document.getElementById('p12').checked == true) {
+            p1 = 2;
+          } else {
+            p1 = 3;
+          }
+    
+          if (document.getElementById('p21').checked == true) {
+            p2 = 1;
+          } else if (document.getElementById('p22').checked == true) {
+            p2 = 2;
+          } else {
+            p2 = 3;
+          }
+    
+          if (document.getElementById('p31').checked == true) {
+            p3 = 1;
+          } else if (document.getElementById('p32').checked == true) {
+            p3 = 2;
+          } else {
+            p3 = 3;
+          }
+    
+          if (document.getElementById('p41').checked == true) {
+            p4 = 3;
+          } else if (document.getElementById('p42').checked == true) {
+            p4 = 2;
+          } else {
+            p4 = 1;
+          }
+    
+          if (document.getElementById('p51').checked == true) {
+            p5 = 1;
+          } else if (document.getElementById('p52').checked == true) {
+            p5 = 2;
+          } else {
+            p5 = 3;
+          }
+    
+          if (document.getElementById('p61').checked == true) {
+            p6 = 1;
+          } else if (document.getElementById('p62').checked == true) {
+            p6 = 2;
+          } else {
+            p6 = 3;
+          }
+    
+          nota = p1 + p2 + p3 + p4 + p5 + p6;
+    
+          if (nota > 0 && nota <= 6) {
+            alert("Usted necesita una dieta para subir masa muscular");
+          } else if (nota > 6 && nota <= 12) {
+            alert("Usted necesita una dieta saludable");
+          } else if (nota > 12 && nota <= 18) {
+            alert("Usted necesita una dieta para bajar de peso");
+          }
+        }
+      </script>
+</body>
+</html>
